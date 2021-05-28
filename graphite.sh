@@ -6,4 +6,4 @@ chmod +x ./graphite_exporter/graphite_exporter
 
 cd ./graphite_exporter
 echo "Start graphite exporter"
-./graphite_exporter --graphite.sample-expiry="48h"
+./graphite_exporter
