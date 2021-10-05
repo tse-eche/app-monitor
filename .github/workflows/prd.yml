@@ -1,0 +1,49 @@
+# This is a basic workflow to help you get started with Actions
+
+name: PRD
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  pull_request:
+    branches: [ master ]
+    types: [ closed ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "deploy"
+  deploy:
+    # The type of runner that the job will run on
+    runs-on: [ self-hosted ]
+
+    # Only run workflow if pull request is merged
+    if: github.event.pull_request.merged == true
+    
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Login to the PCF org and take space
+      - name: Login to our PCF org
+        run: cf login -a ${{ secrets.cf_prod_api_url }} -u ${{ secrets.cf_user }} -p '${{ secrets.cf_prod_password }}' -o ${{ secrets.cf_prod_acamo_org }} -s ACAMO_PRD
+      
+      # Deploy the app to the org and space
+      - name: Deploy app
+        run: cf push --no-route
+
+      # Login to the PCF org and take space
+      - name: Login to our PCF org
+        run: cf login -a ${{ secrets.cf_prod_api_url }} -u ${{ secrets.cf_user }} -p '${{ secrets.cf_prod_password }}' -o ${{ secrets.cf_prod_icmorehub_org }} -s ICMOREHUB_PRD
+      
+      # Deploy the app to the org and space
+      - name: Deploy app
+        run: cf push --no-route
+      
+      # Logout from cf after the deployment
+      - name: Logout from cf
+        run: cf logout
