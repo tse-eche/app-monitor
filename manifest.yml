@@ -2,13 +2,15 @@
 applications:
 - name: app-monitor
   instances: 1
-  disk_quota: 1G
-  memory: 1G
+  disk_quota: 1.5G
+  memory: 512M
   stack: cflinuxfs3
   env:
     GRAPHITE_PORT: 9109
     GRAPHITE_HOST: localhost
-    NO_PROM: "true"
+    PROM_ENABLED: "false"
+  routes:
+  - route: <some.route>
   buildpacks:
   - https://gitlabci.exxeta.com/paas_buildpacks/telegraf-buildpack.git
   - binary_buildpack
