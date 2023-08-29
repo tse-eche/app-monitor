@@ -1,0 +1,20 @@
+name: Deploy Prometheus
+run-name: ${{ github.actor }} is deploying Prometheus in Cloud Foundry
+on: 
+  workflow_dispatch:
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Deploy in Cloud Foundry
+        uses: citizen-of-planet-earth/cf-cli-action@master
+        with:
+          cf_api: ${{ secrets.CF_API }}
+          cf_username: ${{ secrets.CF_USER }}
+          cf_password: ${{ secrets.CF_PASSWORD }}
+          cf_org: ${{ secrets.CF_ORG }}
+          cf_space: ${{ secrets.CF_SPACE }}
+          command: push app-monitor -f /github/workspace/manifest.yml

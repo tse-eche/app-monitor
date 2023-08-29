@@ -1,6 +1,6 @@
 ---
 applications:
-- name: app-monitor
+- name: prometheus
   instances: 1
   disk_quota: 1.5G
   memory: 512M
@@ -10,7 +10,7 @@ applications:
     GRAPHITE_HOST: localhost
     PROM_ENABLED: "false"
   routes:
-  - route: <some.route>
+  - route: prometheus.cfapps.eu10-004.hana.ondemand.com  
   buildpacks:
   - https://gitlabci.exxeta.com/paas_buildpacks/telegraf-buildpack.git
   - binary_buildpack
