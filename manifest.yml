@@ -9,9 +9,12 @@ applications:
     GRAPHITE_PORT: 9109
     GRAPHITE_HOST: localhost
     PROM_ENABLED: "false"
+    ORGANIZATION_NAME: my_org
+    SPACE_NAME: dev 
+    APPLICATION_NAME: prometheus     
   routes:
   - route: prometheus.cfapps.eu10-004.hana.ondemand.com  
   buildpacks:
-  - https://gitlabci.exxeta.com/paas_buildpacks/telegraf-buildpack.git
+  - https://github.com/tse-eche/telegraf-buildpack.git
   - binary_buildpack
   command: "bash $HOME/boot.sh"
