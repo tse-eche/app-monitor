@@ -6,4 +6,4 @@ chmod +x ./prometheus/prometheus
 
 cd ./prometheus
 echo "Start prometheus"
-./prometheus --web.listen-address=:8080
+./prometheus --web.listen-address=:8080 --enable-feature=remote-write-receiver
