@@ -4,7 +4,6 @@ applications:
   instances: 1
   disk_quota: 1.5G
   memory: 512M
-  stack: cflinuxfs3
   env:
     GRAPHITE_PORT: 9109
     GRAPHITE_HOST: localhost
