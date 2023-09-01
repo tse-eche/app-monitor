@@ -17,4 +17,4 @@ jobs:
           cf_password: ${{ secrets.CF_PASSWORD }}
           cf_org: ${{ secrets.CF_ORG }}
           cf_space: ${{ secrets.CF_SPACE }}
-          command: push app-monitor -f /github/workspace/manifest.yml
+          command: push prometheus -f /github/workspace/manifest.yml
